@@ -1,4 +1,5 @@
 'use client';
+import EmotionDetector from './EmotionDetector'; // update the path if it's in another folder
 import { useState } from 'react';
 import {
   CallControls,
@@ -33,7 +34,6 @@ const MeetingRoom = () => {
   const [showParticipants, setShowParticipants] = useState(false);
   const { useCallCallingState } = useCallStateHooks();
 
-  // for more detail about types of CallingState see: https://getstream.io/video/docs/react/ui-cookbook/ringing-call/#incoming-call-panel
   const callingState = useCallCallingState();
 
   if (callingState !== CallingState.JOINED) return <Loader />;
@@ -52,8 +52,11 @@ const MeetingRoom = () => {
   return (
     <section className="relative h-screen w-full overflow-hidden pt-4 text-white">
       <div className="relative flex size-full items-center justify-center">
-        <div className=" flex size-full max-w-[1000px] items-center">
+        <div className="relative w-full h-full flex max-w-[1000px] items-center">
+
           <CallLayout />
+          <EmotionDetector />
+
         </div>
         <div
           className={cn('h-[calc(100vh-86px)] hidden ml-2', {
